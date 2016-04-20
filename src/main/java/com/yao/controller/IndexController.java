@@ -1,11 +1,12 @@
 package com.yao.controller;
 
 import com.yao.dao.IUserDao;
+import com.yao.dao.projectDao;
+import com.yao.entity.project;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,19 @@ public class IndexController {
     @Resource
     private IUserDao userdao;
 
+    @Resource
+    private projectDao  pd;
+
+    @RequestMapping("/psave.do")
+    public String psave(){
+        user user=userdao.findOne(1l);
+        project p=new project();
+        p.setId(11l);
+        p.getProject("math");
+        p.setUser(user);
+        return "index";
+    }
+
     @RequestMapping("/helloworld.do")
     public String  helloworld(Model model){
        model.addAttribute("test","helloworld!");
@@ -30,7 +44,7 @@ public class IndexController {
     @ResponseBody
     public Map json(){
         Map map=new HashMap();
-        map.put("test","helloworld");
+        map.put("test","你好helloworld");
         return map;
     }
 
